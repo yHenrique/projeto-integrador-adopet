@@ -1,0 +1,138 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+body {
+    background-color: #F8FAFC;
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1 {
+    font-size: 2rem;
+    color: #2563EB;
+}
+
+h2 {
+    color: #0A2D6B;
+    font-weight: 800;
+}
+
+label {
+    font-size: 1.1rem;
+    color: #0A2D6B;
+    font-weight: 600;
+}
+
+input {
+    padding: 0.5rem;
+    border-radius: 5px;
+    font-weight: 600;
+}
+
+i {
+    padding-right: 1rem;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0.5rem 1rem;
+}
+
+.cadastro-card {
+    background-color: #DBEAFE;
+    max-width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem;
+    border-radius: 10px;
+    padding: 1rem;
+
+    >div {
+        display: flex;
+        flex-direction: row;
+        padding: 1rem;
+
+        div {
+            display: flex;
+            flex-direction: column;
+            padding-right: 2rem;
+        }
+    }
+
+    button {
+        background-color: #2563EB;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        padding: 0.8rem 2.5rem;
+        font-size: 1rem;
+        font-weight: 500;
+    }
+}
+
+.pet-card {
+    background-color: #DBEAFE;
+    max-width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    margin: 1rem;
+    border-radius: 10px;
+
+    #listaAnimais {
+        li {
+            margin-top: 10px;
+            background-color: #FFFFFF;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+            padding: 1rem;
+            border-radius: 10px;
+
+            div {
+                display: flex;
+                flex-direction: column;
+            }
+        }
+    }
+
+    .petBotao {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .btn {
+        color: white;
+        border: none;
+        border-radius: 30px;
+        cursor: pointer;
+        padding: 1rem 3rem;
+        font-size: 1rem;
+        font-weight: 600;
+        margin: 0.5rem;
+    }
+
+    .botaoEditar {
+        background-color: #2563EB;
+    }
+
+    .botaoRemover {
+        background-color: #EF4444;
+    }
+
+    .foto_pet {
+        max-width: 20%;
+        height: auto;
+    }
+}
