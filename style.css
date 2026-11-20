@@ -136,3 +136,135 @@ ul {
         height: auto;
     }
 }
+
+
+/* Janela de detalhes do pet */
+
+.modal-pet {
+    position: fixed;
+    inset: 0;
+    margin: auto;
+    width: min(90%, 480px);
+    max-height: 85vh;
+    padding: 24px;
+    border: none;
+    border-radius: 15px;
+    background-color: #FFFFFF;
+    color: #0A2D6B;
+    font-family: "Poppins", sans-serif;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+}
+
+.modal-pet::backdrop {
+    background-color: rgba(0, 0, 0, 0.45);
+}
+
+#conteudo-detalhes h3 {
+    font-size: 24px;
+    margin-bottom: 12px;
+}
+
+#conteudo-detalhes p {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+#fechar-detalhes {
+    background-color: #2563EB;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    padding: 10px 24px;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 600;
+    float: right;
+    margin-bottom: 16px;
+}
+
+.foto_pet {
+    cursor: pointer;
+}
+
+
+.foto-detalhes {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 350px;
+    object-fit: contain;
+    border-radius: 10px;
+    margin-bottom: 16px;
+}
+
+
+/* Organização das informações dos pets */
+
+.pet-card #listaAnimais li {
+    align-items: center;
+    justify-content: flex-start;
+    gap: 18px;
+}
+
+.pet-card #listaAnimais .foto_pet {
+    width: 140px;
+    height: 140px;
+    max-width: none;
+    flex-shrink: 0;
+    object-fit: cover;
+}
+
+.pet-card #listaAnimais li > div:first-of-type {
+    min-width: 120px;
+}
+
+.pet-card #listaAnimais li > p {
+    flex: 1;
+}
+
+.pet-card #listaAnimais .petBotao {
+    flex: 0 0 165px;
+}
+
+.pet-card #listaAnimais h3 {
+    cursor: pointer;
+}
+
+
+.pet-card #listaAnimais .sem-foto {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #DBEAFE;
+    color: #0A2D6B;
+    border-radius: 10px;
+    font-size: 14px;
+    text-align: center;
+}
+
+
+/* Responsividade do formulário */
+
+@media (max-width: 1100px) {
+    .cadastro-card {
+        width: calc(100% - 32px);
+        max-width: calc(100% - 32px);
+    }
+
+    .cadastro-card > div {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        width: 100%;
+    }
+
+    .cadastro-card > div > div {
+        flex: 1 1 180px;
+        min-width: 0;
+        padding-right: 0;
+    }
+
+    .cadastro-card input:not([type="checkbox"]) {
+        max-width: 100%;
+    }
+}
