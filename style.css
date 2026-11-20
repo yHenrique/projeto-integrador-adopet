@@ -4,7 +4,10 @@
 }
 
 body {
-    background-color: #F8FAFC;
+    background-image: url("background.png");
+    background-repeat: repeat;
+    background-size: 500px;
+    background-color: #FAF7F2;
     font-family: "Poppins", sans-serif;
     font-style: normal;
     display: flex;
@@ -12,23 +15,33 @@ body {
     align-items: center;
 }
 
-h1 {
-    font-size: 2rem;
-    color: #2563EB;
+img {
+    max-width: 15%;
+    height: auto;
 }
 
+/* h1 {
+    font-size: 3rem;
+    color: #4B4540;
+} */
+
 h2 {
-    color: #0A2D6B;
+    color: #8B624A;
     font-weight: 800;
+}
+
+h3 {
+    color: #6D7560;
 }
 
 label {
     font-size: 1.1rem;
-    color: #0A2D6B;
+    color: #6D7560;
     font-weight: 600;
 }
 
 input {
+    background-color: #FAF7F2;
     padding: 0.5rem;
     border-radius: 5px;
     font-weight: 600;
@@ -44,58 +57,68 @@ ul {
     margin: 0.5rem 1rem;
 }
 
+p {
+    color: #6D7560;
+    font-weight: 600;
+}
+
 .cadastro-card {
-    background-color: #DBEAFE;
-    max-width: 80%;
+    background-color: #F5E9DC;
+    max-width: 50%;
+    width: auto;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     margin: 1rem;
     border-radius: 10px;
     padding: 1rem;
 
-    >div {
-        display: flex;
-        flex-direction: row;
-        padding: 1rem;
-
-        div {
+    form {
+        >div {
             display: flex;
-            flex-direction: column;
-            padding-right: 2rem;
+            flex-direction: row;
+            padding: 1rem 0;
+
+            div {
+                display: flex;
+                flex-direction: column;
+                padding-right: 2rem;
+            }
         }
     }
 
     button {
-        background-color: #2563EB;
+        background-color: #2592eb;
         color: white;
         border: none;
         border-radius: 10px;
         cursor: pointer;
         padding: 0.8rem 2.5rem;
         font-size: 1rem;
-        font-weight: 500;
+        font-weight: 600;
     }
 }
 
 .pet-card {
-    background-color: #DBEAFE;
-    max-width: 80%;
+    background-color: #F5E9DC;
+    max-width: 50%;
+    width: auto;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
+    align-items: flex-start;
     margin: 1rem;
+    padding: 1rem;
     border-radius: 10px;
 
     #listaAnimais {
+        margin: 0;
+
         li {
             margin-top: 10px;
-            background-color: #FFFFFF;
+            background-color: #FAF7F2;
             display: flex;
             flex-direction: row;
-            justify-content: space-evenly;
+            justify-content: space-between;
             padding: 1rem;
             border-radius: 10px;
 
@@ -121,14 +144,24 @@ ul {
         font-size: 1rem;
         font-weight: 600;
         margin: 0.5rem;
+        transition: background-color 0.3s ease;
     }
 
     .botaoEditar {
-        background-color: #2563EB;
+        background-color: #2592eb;
+        /*#2563EB*/
+
+        .fa-pencil {
+            color: white;
+        }
     }
 
     .botaoRemover {
-        background-color: #EF4444;
+        background-color: #ef4f44;
+
+        .fa-thrash-can {
+            color: white;
+        }
     }
 
     .foto_pet {

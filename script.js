@@ -10,7 +10,7 @@ function cadastrarPet() {
     let descricao = document.getElementById("descricao").value;
     let inputFile = document.getElementById("input-file");
 
-    if (nome == "" || especie == "" || idade == "" || porte == "") {
+    if (nome == "" || especie == "" || idade == "" || porte == "" || vacina == "") {
         alert("Preencha todos os campos!");
         return;
     }
@@ -43,34 +43,43 @@ function mostrarPets() {
 
         let divInfo = document.createElement("div");
         let nomePet = document.createElement("h3");
-        nomePet.textContent = pets[i].nome;
+        nomePet.textContent = "Nome: " + pets[i].nome;
 
         // let especiePet = document.createElement("p");
         // especiePet.textContent = pets[i].especie;
 
         let idadePet = document.createElement("p");
-        idadePet.textContent = pets[i].idade + " anos";
+        idadePet.textContent = "Idade: " + pets[i].idade + " anos";
 
         let portePet = document.createElement("p");
-        portePet.textContent = pets[i].porte;
+        portePet.textContent = "Porte: " + pets[i].porte;
 
         let vacinaPet = document.createElement("p");
-        vacinaPet.textContent = pets[i].vacina;
+        vacinaPet.textContent = "Vacinado: " + pets[i].vacina;
 
         let descPet = document.createElement("p");
-        descPet.textContent = pets[i].descricao;
+        descPet.textContent = "Descrição: " + pets[i].descricao;
 
         let divBotao = document.createElement("div");
         divBotao.className = "petBotao";
-        let botaoEditar = document.createElement("button");
+
+        let iconeEditar = document.createElement("i");
+        iconeEditar.className = "fa-solid fa-pencil";
+
+        let botaoEditar = document.createElement("button"); 
         botaoEditar.textContent = "Editar";
         botaoEditar.className = "btn botaoEditar";
         botaoEditar.onClick = () => editarPet(i);
+        botaoEditar.prepend(iconeEditar, " ");
+
+        let iconeRemover = document.createElement("i");
+        iconeRemover.className = "fa-solid fa-trash-can";
 
         let botaoRemover = document.createElement("button");
         botaoRemover.textContent = "Remover";
         botaoRemover.className = "btn botaoRemover";
         botaoRemover.onclick = () => removerPet(i);
+        botaoRemover.prepend(iconeRemover, " ");
 
         novoPet.appendChild(fotoPet);
 
