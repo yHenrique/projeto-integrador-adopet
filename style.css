@@ -96,6 +96,11 @@ p {
         padding: 0.8rem 2.5rem;
         font-size: 1rem;
         font-weight: 600;
+        transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+        background-color: #2592ebbb;
     }
 }
 
@@ -144,24 +149,32 @@ p {
         font-size: 1rem;
         font-weight: 600;
         margin: 0.5rem;
-        transition: background-color 0.3s ease;
     }
 
     .botaoEditar {
         background-color: #2592eb;
-        /*#2563EB*/
+        transition: background-color 0.3s ease;
 
         .fa-pencil {
             color: white;
         }
     }
 
+    .botaoEditar:hover {
+        background-color: #2592ebbb;
+    }
+
     .botaoRemover {
         background-color: #ef4f44;
+        transition: background-color 0.3s ease;
 
         .fa-thrash-can {
             color: white;
         }
+    }
+
+    .botaoRemover:hover {
+        background-color: #ef4f44bb;
     }
 
     .foto_pet {

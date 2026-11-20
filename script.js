@@ -66,7 +66,7 @@ function mostrarPets() {
         let iconeEditar = document.createElement("i");
         iconeEditar.className = "fa-solid fa-pencil";
 
-        let botaoEditar = document.createElement("button"); 
+        let botaoEditar = document.createElement("button");
         botaoEditar.textContent = "Editar";
         botaoEditar.className = "btn botaoEditar";
         botaoEditar.onClick = () => editarPet(i);
