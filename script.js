@@ -2,43 +2,38 @@ let pets = JSON.parse(localStorage.getItem("pets")) || [];
 let indiceEmEdicao = null;
 mostrarPets();
 
-
 function cadastrarPet() {
     const nome = document.getElementById("nome").value.trim();
     const especie = document.getElementById("especie").value;
     const idade = document.getElementById("idade").value;
     const porte = document.getElementById("porte").value;
-    const vacina = document.getElementById("vacina").checked;
+    const vacina = document.getElementById("vacina").value;
     const descricao = document.getElementById("descricao").value;
     const inputFile = document.getElementById("input-file");
 
-    if (nome === "" || especie === "" || idade === "" || porte === "") {
+    if (nome === "" || especie === "" || idade === "" || porte === "" || vacina === "" || descricao === "") {
         alert("Preencha todos os campos obrigatórios!");
         return;
     }
 
     function salvarPet(foto) {
+        const pet = {
+            nome,
+            especie,
+            idade: Number(idade),
+            porte,
+            vacina,
+            descricao,
+            inputFile: foto
+        };
 
-const pet = {
-    nome,
-    especie,
-    idade: Number(idade),
-    porte,
-    vacina,
-    descricao,
-    inputFile: foto
-};
+        const novosPets = [...pets];
 
-
-        
-const novosPets = [...pets];
-
-if (indiceEmEdicao !== null) {
-    novosPets[indiceEmEdicao] = pet;
-} else {
-    novosPets.push(pet);
-}
-
+        if (indiceEmEdicao !== null) {
+            novosPets[indiceEmEdicao] = pet;
+        } else {
+            novosPets.push(pet);
+        }
 
         try {
             localStorage.setItem("pets", JSON.stringify(novosPets));
@@ -54,29 +49,26 @@ if (indiceEmEdicao !== null) {
         document.getElementById("especie").value = "";
         document.getElementById("idade").value = "";
         document.getElementById("porte").value = "";
-        document.getElementById("vacina").checked = false;
+        document.getElementById("vacina").value = "";
         document.getElementById("descricao").value = "";
         inputFile.value = "";
 
-indiceEmEdicao = null;
+        indiceEmEdicao = null;
 
-document.querySelector(".cadastro-card button").innerHTML =
-    '<i class="fa fa-plus"></i>Incluir Pet';
-
+        document.querySelector(".cadastro-card button").innerHTML =
+            '<i class="fa fa-plus"></i>Incluir Pet';
     }
 
     const arquivo = inputFile.files[0];
 
-    
-if (!arquivo) {
-    const fotoAnterior = indiceEmEdicao !== null
-        ? pets[indiceEmEdicao].inputFile || ""
-        : "";
+    if (!arquivo) {
+        const fotoAnterior = indiceEmEdicao !== null
+            ? pets[indiceEmEdicao].inputFile || ""
+            : "";
 
-    salvarPet(fotoAnterior);
-    return;
-}
-
+        salvarPet(fotoAnterior);
+        return;
+    }
 
     if (!["image/jpeg", "image/png"].includes(arquivo.type)) {
         alert("Selecione uma imagem JPG ou PNG.");
@@ -90,17 +82,16 @@ if (!arquivo) {
 
     const leitor = new FileReader();
 
-    leitor.onload = function() {
+    leitor.onload = function () {
         salvarPet(leitor.result);
     };
 
-    leitor.onerror = function() {
+    leitor.onerror = function () {
         alert("Não foi possível carregar a imagem.");
     };
 
     leitor.readAsDataURL(arquivo);
 }
-
 
 function mostrarPets() {
     let lista = document.getElementById("listaAnimais");
@@ -108,43 +99,35 @@ function mostrarPets() {
 
     for (let i = 0; i < pets.length; i++) {
         let novoPet = document.createElement("li");
+        let fotoPet;
 
-        
-let fotoPet;
+        if (pets[i].inputFile) {
+            fotoPet = document.createElement("img");
+            fotoPet.src = pets[i].inputFile;
+            fotoPet.alt = `Foto de ${pets[i].nome}`;
+        } else {
+            fotoPet = document.createElement("span");
+            fotoPet.textContent = "Sem foto";
+            fotoPet.className = "sem-foto";
+        }
 
-if (pets[i].inputFile) {
-    fotoPet = document.createElement("img");
-    fotoPet.src = pets[i].inputFile;
-    fotoPet.alt = `Foto de ${pets[i].nome}`;
-} else {
-    fotoPet = document.createElement("span");
-    fotoPet.textContent = "Sem foto";
-    fotoPet.className = "sem-foto";
-}
-
-fotoPet.classList.add("foto_pet");
-fotoPet.addEventListener("click", () => abrirDetalhesPet(i));
-
+        fotoPet.classList.add("foto_pet");
+        fotoPet.addEventListener("click", () => abrirDetalhesPet(i));
 
         let divInfo = document.createElement("div");
         let nomePet = document.createElement("h3");
-        nomePet.textContent = pets[i].nome;
+        nomePet.textContent = "Nome: " + pets[i].nome;
         nomePet.addEventListener("click", () => abrirDetalhesPet(i));
 
-        // let especiePet = document.createElement("p");
-        // especiePet.textContent = pets[i].especie;
-
         let idadePet = document.createElement("p");
-        idadePet.textContent = pets[i].idade + 
-    (Number(pets[i].idade) === 1 ? " ano" : " anos");
+        idadePet.textContent = "Idade: " + pets[i].idade +
+            (Number(pets[i].idade) === 1 ? " ano" : " anos");
 
         let portePet = document.createElement("p");
         portePet.textContent = "Porte: " + pets[i].porte;
 
         let vacinaPet = document.createElement("p");
-        vacinaPet.textContent = pets[i].vacina === true || pets[i].vacina === "on"
-    ? "Vacinado(a)"
-    : "Não vacinado(a)";
+        vacinaPet.textContent = "Vacinado: " + pets[i].vacina;
 
         let descPet = document.createElement("p");
         descPet.textContent = "Descrição: " + pets[i].descricao;
@@ -159,6 +142,10 @@ fotoPet.addEventListener("click", () => abrirDetalhesPet(i));
         botaoEditar.textContent = "Editar";
         botaoEditar.className = "btn botaoEditar";
         botaoEditar.onclick = () => editarPet(i);
+        botaoEditar.prepend(iconeEditar, " ");
+
+        let iconeRemover = document.createElement("i");
+        iconeRemover.className = "fa-solid fa-trash-can";
 
         let botaoRemover = document.createElement("button");
         botaoRemover.textContent = "Remover";
@@ -169,13 +156,11 @@ fotoPet.addEventListener("click", () => abrirDetalhesPet(i));
         novoPet.appendChild(fotoPet);
 
         divInfo.appendChild(nomePet);
-        // divInfo.appendChild(especiePet);
         divInfo.appendChild(idadePet);
         divInfo.appendChild(portePet);
         divInfo.appendChild(vacinaPet);
+        divInfo.appendChild(descPet);
         novoPet.appendChild(divInfo);
-
-        novoPet.appendChild(descPet);
 
         divBotao.appendChild(botaoEditar);
         divBotao.appendChild(botaoRemover);
@@ -184,7 +169,6 @@ fotoPet.addEventListener("click", () => abrirDetalhesPet(i));
         lista.appendChild(novoPet);
     }
 }
-
 
 function editarPet(i) {
     const pet = pets[i];
@@ -195,17 +179,21 @@ function editarPet(i) {
     document.getElementById("especie").value = pet.especie;
     document.getElementById("idade").value = pet.idade;
     document.getElementById("porte").value = pet.porte;
-    document.getElementById("vacina").checked =
-        pet.vacina === true || pet.vacina === "on";
+    document.getElementById("vacina").value = pet.vacina;
     document.getElementById("descricao").value = pet.descricao || "";
 
-    document.querySelector(".cadastro-card button").textContent =
-        "Salvar alterações";
+    const salvarBotao = document.querySelector(".cadastro-card button");
+    const iconeSalvar = document.createElement("i");
+    iconeSalvar.className = "fa-solid fa-pencil";
+    salvarBotao.prepend(iconeSalvar, " ");
+    salvarBotao.textContent = "Salvar alterações";
+
+    // document.querySelector(".cadastro-card button").textContent =
+    //     "Salvar alterações";
 
     document.getElementById("nome").focus();
     window.scrollTo({ top: 0, behavior: "smooth" });
 }
-
 
 function removerPet(i) {
     pets.splice(i, 1);
@@ -213,50 +201,47 @@ function removerPet(i) {
     mostrarPets();
 }
 
-
 function abrirDetalhesPet(i) {
     const pet = pets[i];
-    const foto = document.createElement("img");
-foto.className = "foto-detalhes";
-foto.alt = `Foto de ${pet.nome}`;
+    let foto;
 
-if (pet.inputFile) {
-    foto.src = pet.inputFile;
-}
+    if (pet.inputFile) {
+        foto = document.createElement("img");
+        foto.src = pet.inputFile;
+        foto.className = "foto-detalhes";
+        foto.alt = `Foto de ${pet.nome}`;
+    } else {
+        foto = document.createElement("span");
+        foto.textContent = "Sem foto";
+        foto.className = "sem-foto";
+    }
 
-foto.onerror = function() {
-    foto.remove();
-};
+    foto.onerror = function () {
+        foto.remove();
+    };
 
     const modal = document.getElementById("detalhes-pet");
     const conteudo = document.getElementById("conteudo-detalhes");
 
-    const nome = document.createElement("h3");
+    const nome = document.createElement("h1");
     nome.textContent = pet.nome;
 
     const informacoes = document.createElement("p");
-   const idadeFormatada = Number(pet.idade) === 1
-    ? "1 ano"
-    : `${pet.idade} anos`;
+    const idadeFormatada = Number(pet.idade) === 1
+        ? "1 ano"
+        : `${pet.idade} anos`;
 
-informacoes.textContent = `${pet.especie} • ${idadeFormatada} • Porte ${pet.porte}`;
+    informacoes.textContent = `${pet.especie} • ${idadeFormatada} • Porte ${pet.porte} • Vacinado ${pet.vacina}`;
 
     const descricao = document.createElement("p");
     descricao.textContent = pet.descricao || "Sem descrição.";
     const vacina = document.createElement("p");
 
-const vacinado = pet.vacina === true || pet.vacina === "on";
-
-vacina.textContent = vacinado
-    ? "Vacinação: Vacinado(a)"
-    : "Vacinação: Não vacinado(a)";
-
     conteudo.replaceChildren(foto, nome, informacoes, vacina, descricao);
 
     modal.showModal();
 
-    document.getElementById("fechar-detalhes").addEventListener("click", function() {
-    document.getElementById("detalhes-pet").close();
-});
+    document.getElementById("fechar-detalhes").addEventListener("click", function () {
+        document.getElementById("detalhes-pet").close();
+    });
 }
-
