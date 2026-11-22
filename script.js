@@ -2,6 +2,33 @@ let pets = JSON.parse(localStorage.getItem("pets")) || [];
 let indiceEmEdicao = null;
 mostrarPets();
 
+// Cadastro de usuário
+const formularioUsuario = document.getElementById("formulario-usuario");
+
+formularioUsuario.addEventListener("submit", function (evento) {
+    evento.preventDefault();
+
+    const nome = document.getElementById("usuario-nome").value.trim();
+    const email = document.getElementById("usuario-email").value.trim();
+    const telefone = document.getElementById("usuario-telefone").value.trim();
+    const senha = document.getElementById("usuario-senha").value;
+
+    if (nome === "" || email === "" || telefone === "" || senha === "") {
+        alert("Preencha todos os campos!");
+        return;
+    }
+
+    if (senha.length < 6) {
+        alert("A senha deve ter pelo menos 6 caracteres.");
+        return;
+    }
+
+    alert("Cadastro realizado com sucesso!");
+
+    formularioUsuario.reset();
+});
+
+
 function cadastrarPet() {
     const nome = document.getElementById("nome").value.trim();
     const especie = document.getElementById("especie").value;
